@@ -56,8 +56,21 @@ fn number_to_char(num: u32) -> char {
         5 => 'f',
         6 => 'g',
         7 => 'h',
-        // Should panic here...
         _ => '!',
+    }
+}
+
+fn char_to_number(char: char) -> u32 {
+    match char {
+        'a' => 0,
+        'b' => 1,
+        'c' => 2,
+        'd' => 3,
+        'e' => 4,
+        'f' => 5,
+        'g' => 6,
+        'h' => 7,
+        _ => -1,
     }
 }
 
@@ -117,7 +130,7 @@ impl ArrayBoard {
             for rank in 0..8{
                 let occupant = &self.array_board[row][rank];
                 match rank {
-                    0 => print!("{} | {} | ", row, occupant),
+                    0 => print!("{} | {} | ", 8 - row, occupant),
                     7 => {
                         println!("{} |", occupant);
                     },
@@ -126,8 +139,8 @@ impl ArrayBoard {
 
             };
         };
-            println!("  ---------------------------------");
-            println!("    a   b   c   d   e   f   g   h");
+        println!("  ---------------------------------");
+        println!("    a   b   c   d   e   f   g   h");
     }
 }
 
