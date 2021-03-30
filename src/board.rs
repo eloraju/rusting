@@ -70,7 +70,7 @@ fn char_to_number(char: char) -> u32 {
         'f' => 5,
         'g' => 6,
         'h' => 7,
-        _ => -1,
+        _ => 99,
     }
 }
 
@@ -125,12 +125,15 @@ impl ArrayBoard {
     }
 
     pub fn print(&self) {
+        println!();
+        println!(" --- Welcome to the nameless chess engine! ---");
+        println!();
         for row in 0..8 {
-            println!("  ---------------------------------");
+            println!("       ---------------------------------");
             for rank in 0..8{
                 let occupant = &self.array_board[row][rank];
                 match rank {
-                    0 => print!("{} | {} | ", 8 - row, occupant),
+                    0 => print!("     {} | {} | ", 8 - row, occupant),
                     7 => {
                         println!("{} |", occupant);
                     },
@@ -139,8 +142,8 @@ impl ArrayBoard {
 
             };
         };
-        println!("  ---------------------------------");
-        println!("    a   b   c   d   e   f   g   h");
+        println!("       ---------------------------------");
+        println!("         a   b   c   d   e   f   g   h");
     }
 }
 
