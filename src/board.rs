@@ -1,26 +1,37 @@
-trait InitableFromState<T>{
-    fn init_with_state(&self, state: T) -> Self;
-}
-
+//trait InitableFromState<T>{
+//    fn init_with_state(&self, state: T) -> Self;
+//}
+//
 // Board can be initialized with portable game notation
 // This means that I'll have to write a PGN parser... oh boiiii
 //trait InitableFromPGN {
 //    fn init_with_pgn(&self, pgn: &str) -> Self;
 //}
 
+// remove this on a later date
+#![allow(dead_code)]
 
 struct Game {
-    // 'can castle' basically means that 'has the king moved' 
-    // there are other rules to castling as well, but those
-    // should be handled when generating moves
-    // or should they....
     w_can_castle: bool,
     w_en_passant: bool,
     b_can_castle: bool,
     b_en_passant: bool,
     check: bool,
-    turn: bool, // true = white, false = black
-    turn_count: u16, // better be safe than sorry
+    turn_count: f32, // interget value = white, fractional value = black
+}
+
+impl Game {
+    fn new() -> Self {
+        Self {
+            w_can_castle: true,
+            w_en_passant: true,
+            b_can_castle: true,
+            b_en_passant: true,
+            check: false,
+            turn_count: 0.0
+        }
+    }
+
 }
 
 pub struct ArrayBoard {
@@ -30,17 +41,93 @@ pub struct ArrayBoard {
     // working :)
     rules: Game,
     array_board: [[String; 8]; 8],
+    // This should make it trivial to move backwards and forwards in the 
+    // move history
     history: Vec<ArrayBoard>,
 }
 
-impl ArrayBoard {
-
+fn number_to_char(num: u32) -> char {
+    match num {
+        0 => 'a',
+        1 => 'b',
+        2 => 'c',
+        3 => 'd',
+        4 => 'e',
+        5 => 'f',
+        6 => 'g',
+        7 => 'h',
+        // Should panic here...
+        _ => '!',
+    }
 }
 
-// 
-impl InitableFromState<&str> for ArrayBoard {
-    fn init_with_state(&self, state: &str) -> Self {
+//  More sutff into the backlog :)
+//impl InitableFromState<&str> for ArrayBoard {
+//    fn init_with_state(&self, state: &str) -> Self {
+//
+//    }
+//}
 
+impl ArrayBoard {
+
+    /*
+     * Create new board that should look something like this
+     *   ---------------------------------
+     * 8 | r | n | b | q | k | b | n | r |
+     *   |-------------------------------|
+     * 7 | p | p | p | p | p | p | p | p |
+     *   |-------------------------------|
+     * 6 |   |   |   |   |   |   |   |   |
+     *   |-------------------------------|
+     * 5 |   |   |   |   |   |   |   |   |
+     *   |-------------------------------|
+     * 4 |   |   |   |   |   |   |   |   |
+     *   |-------------------------------|
+     * 3 |   |   |   |   |   |   |   |   |
+     *   |-------------------------------|
+     * 2 | P | P | P | P | P | P | P | P |
+     *   |-------------------------------|
+     * 1 | R | N | B | Q | K | B | N | R |
+     *   ---------------------------------
+     *     a   b   c   d   e   f   g   h
+     *
+     */
+
+
+    pub fn new() -> Self {
+        Self {
+            rules: Game::new(),
+            history: Vec::new(),
+            array_board: [
+                [String::from("r"),String::from("n"),String::from("b"),String::from("q"),String::from("k"),String::from("b"),String::from("n"),String::from("r")],
+                [String::from("p"),String::from("p"),String::from("p"),String::from("p"),String::from("p"),String::from("p"),String::from("p"),String::from("p")],
+                [String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" ")],
+                [String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" ")],
+                [String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" ")],
+                [String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" ")],
+                [String::from("P"),String::from("P"),String::from("P"),String::from("P"),String::from("P"),String::from("P"),String::from("P"),String::from("P")],
+                [String::from("R"),String::from("N"),String::from("B"),String::from("Q"),String::from("K"),String::from("B"),String::from("N"),String::from("R")],
+            ]
+        }
+    }
+
+    pub fn print(&self) {
+        for row in 0..8 {
+            println!("  ---------------------------------");
+            for rank in 0..8{
+                let occupant = &self.array_board[row][rank];
+                match rank {
+                    0 => print!("{} | {} | ", row, occupant),
+                    7 => {
+                        println!("{} |", occupant);
+                    },
+                    _ => print!("{} | ", occupant),
+                }
+
+            };
+        };
+            println!("  ---------------------------------");
+            println!("    a   b   c   d   e   f   g   h");
     }
 }
 
