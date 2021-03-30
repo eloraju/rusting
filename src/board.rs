@@ -74,6 +74,25 @@ fn char_to_number(char: char) -> u32 {
     }
 }
 
+fn char_to_piece_utf8(input: &str)-> String {
+    match input {
+        "K"=>String::from("♔"),
+        "Q"=> String::from("♕"),
+        "R"=> String::from("♖"),
+        "B"=> String::from("♗"),
+        "N"=> String::from("♘"),
+        "P"=> String::from("♙"),
+        "k"=> String::from("♚"),
+        "q"=> String::from("♛"),
+        "r"=> String::from("♜"),
+        "b"=> String::from("♝"),
+        "n"=> String::from("♞"),
+        "p"=> String::from("♟︎"),
+        " " => String::from(" "),
+        _ => String::from("💩"),
+    }
+}
+
 //  More sutff into the backlog :)
 //impl InitableFromState<&str> for ArrayBoard {
 //    fn init_with_state(&self, state: &str) -> Self {
@@ -131,13 +150,13 @@ impl ArrayBoard {
         for row in 0..8 {
             println!("       ---------------------------------");
             for rank in 0..8{
-                let occupant = &self.array_board[row][rank];
+                let piece = char_to_piece_utf8(&self.array_board[row][rank]);
                 match rank {
-                    0 => print!("     {} | {} | ", 8 - row, occupant),
+                    0 => print!("     {} | {} | ", 8 - row, piece),
                     7 => {
-                        println!("{} |", occupant);
+                        println!("{} |", piece);
                     },
-                    _ => print!("{} | ", occupant),
+                    _ => print!("{} | ", piece),
                 }
 
             };
