@@ -8,6 +8,8 @@ This repo is part of Wunderdog's intrest groups and in this case rust intrest gr
 
 Hopefully something that resembles a chess engine...
 
+Maybe creating a terminal program that you can solve puzzles with could actually be the thing to strive towards.
+
 ### How to build a chess engine
 
 🤷
@@ -23,3 +25,12 @@ I need to be able to
 5. Become the next Murphy
 
 Sillyness aside, I should be able to build this thing more or less incrementally. Starting with initializing a board and coming up with a way to print out the board to the terminal. After that's done I might move on to inputting moves (no validation yet). My initial idea was to have the engine run as a daemon and then using commands like `rce Ne5 (move knight to E5)` trying to move a piece on the board. That would be extremely cool since with those two features and a way of importing chess puzzles, I could create a terminal chess puzzle program! I don't have to validate the moves, just check whether the move is the one the puzzle is looking for or not. 
+
+
+## Developemnt
+
+I'll post small updates on what is happening with the engine
+
+### 21-03-30
+
+Started the project! I did have a idea of what Rust is and that helped to get me even this far. In the span of about 8 hours I managed to read up quite a bit on how a chess engine works and what is actually needed to have a workign engine. A bug free core is mentioned multiple times soooo... Tests? I also managed to create the first iteration of the board representation. At first I really wanted to create a bitboard, but that proved to be a bit too much to take in this early on. I decided to make this first go a bit easier for myself and pivoted to using just multi-dimensional array. Once I did that it took me maybe a couple of hours to get to the point where I had the program spewing the board into the terminal! Next up I should come up with a way to initialize the board with a custom state. Gotta look into PGN and FEN.. Maybe I'll start with just a string or array of strings? I would like to see how IO works with rust so maybe a text file with 8x8 char matrix?
