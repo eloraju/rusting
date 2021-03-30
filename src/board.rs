@@ -131,14 +131,14 @@ impl ArrayBoard {
             rules: Game::new(),
             history: Vec::new(),
             array_board: [
-                [String::from("r"),String::from("n"),String::from("b"),String::from("q"),String::from("k"),String::from("b"),String::from("n"),String::from("r")],
-                [String::from("p"),String::from("p"),String::from("p"),String::from("p"),String::from("p"),String::from("p"),String::from("p"),String::from("p")],
-                [String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" ")],
-                [String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" ")],
-                [String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" ")],
-                [String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" ")],
-                [String::from("P"),String::from("P"),String::from("P"),String::from("P"),String::from("P"),String::from("P"),String::from("P"),String::from("P")],
                 [String::from("R"),String::from("N"),String::from("B"),String::from("Q"),String::from("K"),String::from("B"),String::from("N"),String::from("R")],
+                [String::from("P"),String::from("P"),String::from("P"),String::from("P"),String::from("P"),String::from("P"),String::from("P"),String::from("P")],
+                [String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" ")],
+                [String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" ")],
+                [String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" ")],
+                [String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" "),String::from(" ")],
+                [String::from("p"),String::from("p"),String::from("p"),String::from("p"),String::from("p"),String::from("p"),String::from("p"),String::from("p")],
+                [String::from("r"),String::from("n"),String::from("b"),String::from("q"),String::from("k"),String::from("b"),String::from("n"),String::from("r")],
             ]
         }
     }
