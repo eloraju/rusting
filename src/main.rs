@@ -1,6 +1,9 @@
-use rusting::board:: ArrayBoard;
+pub mod board;
+pub mod game;
 
 fn main() {
-    let board  = ArrayBoard::new();
+    let board  = ABoard::new();
     board.print();
+
+    let game = Game::new(board);
 }
