@@ -46,3 +46,7 @@ Maybe I'll just have to KISS and revert back to what I had before, create a FEN/
 Whooa boi. Did a whole lot of refactoring last night and this morning. Read and watched some tutorials about modules and testing and decided to give them a go. At the moment I feel like I made good decisions but I'll take another look into this in the evening. Then I'll know for sure. I know that the regex tests are failing but I'll address that in the evening.
 
 Special thanks to [@murtsi](https://github.com/katis) for telling me about the vector/index implementation of linked lists. I did expand on the idea a bit but time will tell whether my contributions were any good :D
+
+#### Evening update
+
+Didn't spend that much time on this. Fixed the failing test - or rather fixed my code - and started to work on FEN parsing.
