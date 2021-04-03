@@ -64,7 +64,7 @@ impl Board for ABoard {
     fn get(&self, square: Square) -> Occupant {
         // Since the board is upside down in memore we need to 
         // calculate the correct rank. No biggie
-        let rank_index = 9 - square.rank;
+        let rank_index = square.rank - 1;
         let file_index = file_to_number(square.file);
         let occupant_str = &self.board[rank_index][file_index];
 

@@ -1,6 +1,7 @@
 use super::board::Square;
 use regex::Regex;
 
+
 pub fn number_to_file(num: u32) -> char {
     match num {
         0 => 'a',
@@ -49,8 +50,11 @@ pub fn char_to_piece(input: &str)-> String {
 }
 
 pub fn str_to_square(square: &str) -> Square {
-    let re = Regex::new(r"(^?P<file>[a-h])(?<rank>[1-8])&").unwrap();
-    let caps = re.captures(square).unwrap();
+    lazy_static! {
+        static ref SQUARE_RE: Regex = Regex::new(r"^(?P<file>[a-h])(?P<rank>[1-8])$").unwrap();
+    }
+
+    let caps = SQUARE_RE.captures(square).unwrap();
 
     // convert tile to char
     // This ugly
