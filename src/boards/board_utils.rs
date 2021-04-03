@@ -1,6 +1,3 @@
-use String::from as str;
-
-
 pub fn number_to_char(num: u32) -> char {
     match num {
         0 => 'a',
@@ -31,19 +28,23 @@ pub fn char_to_number(char: char) -> u32 {
 
 pub fn char_to_piece(input: &str)-> String {
     match input {
-        "K"=>str("♔"),
-        "Q"=> str("♕"),
-        "R"=> str("♖"),
-        "B"=> str("♗"),
-        "N"=> str("♘"),
-        "P"=> str("♙"),
-        "k"=> str("♚"),
-        "q"=> str("♛"),
-        "r"=> str("♜"),
-        "b"=> str("♝"),
-        "n"=> str("♞"),
-        "p"=> str("♟︎"),
-        " "=> str(" "),
-        _  => str("💩"),
+        "K"=> s("♔"),
+        "Q"=> s("♕"),
+        "R"=> s("♖"),
+        "B"=> s("♗"),
+        "N"=> s("♘"),
+        "P"=> s("♙"),
+        "k"=> s("♚"),
+        "q"=> s("♛"),
+        "r"=> s("♜"),
+        "b"=> s("♝"),
+        "n"=> s("♞"),
+        "p"=> s("♟︎"),
+        " "=> s(" "),
+        _  => s("💩"),
     }
+}
+
+pub fn s(s:&str) -> String {
+    s.to_string()
 }

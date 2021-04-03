@@ -1,9 +1,10 @@
-pub mod board;
-pub mod game;
+mod boards;
+use boards::array_board::ABoard;
+use boards::board::Board;
+
+mod game;
 
 fn main() {
     let board  = ABoard::new();
     board.print();
-
-    let game = Game::new(board);
 }
