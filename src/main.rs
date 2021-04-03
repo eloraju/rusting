@@ -1,4 +1,5 @@
 mod boards;
+mod test;
 use boards::array_board::ABoard;
 use boards::board::Board;
 

@@ -1,15 +1,12 @@
-
-enum Turn {
+use crate::Board;
+use crate::boards::board::Square;
+pub enum Turn {
     WHITE,
     BLACK
 }
 
-enum Square {
-    Row(String),
-    Rank(u8)
-}
 
-struct State<T: Board> {
+pub struct State<T: Board> {
     en_passant: Option<Square>,
     w_k_castle: bool,
     w_q_castle: bool,

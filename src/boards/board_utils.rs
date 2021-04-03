@@ -1,4 +1,7 @@
-pub fn number_to_char(num: u32) -> char {
+use super::board::Square;
+use regex::Regex;
+
+pub fn number_to_file(num: u32) -> char {
     match num {
         0 => 'a',
         1 => 'b',
@@ -12,7 +15,7 @@ pub fn number_to_char(num: u32) -> char {
     }
 }
 
-pub fn char_to_number(char: char) -> u32 {
+pub fn file_to_number(char: char) -> usize {
     match char {
         'a' => 0,
         'b' => 1,
@@ -45,6 +48,32 @@ pub fn char_to_piece(input: &str)-> String {
     }
 }
 
+pub fn str_to_square(square: &str) -> Square {
+    let re = Regex::new(r"(^?P<file>[a-h])(?<rank>[1-8])&").unwrap();
+    let caps = re.captures(square).unwrap();
+
+    // convert tile to char
+    // This ugly
+    let file = caps["file"].chars().last().unwrap();
+    // convert rank to u8
+    let rank =caps["rank"].parse::<usize>().unwrap();
+
+    return Square::new(file, rank)
+}
+
 pub fn s(s:&str) -> String {
     s.to_string()
+}
+
+
+#[cfg(test)]
+mod tests{
+    use super::*;
+
+    fn str_to_square_should_return_square() {
+        let str = "e4";
+        let square = str_to_square(str);
+        let expected = Square::new('e', 4);
+        assert_eq!(square, expected);
+    }
 }
