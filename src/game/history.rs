@@ -9,11 +9,14 @@ pub struct History<T: Board>{
 impl<T> History<T> 
 where T: Board
 {
-    fn new() -> Self {
-        Self {
+    fn new(init_state: State<T>) -> Self {
+        let mut inst = Self {
             current_state: 0,
             states: Vec::new(),
-        }
+        };
+
+        inst.states.push(init_state);
+        return inst;
     }
 
     fn state(&self) -> &State<T> {
@@ -39,13 +42,27 @@ where T: Board
 
         return next_state;
     }
+
+    // Mutation galore...
+    fn push(&mut self, new_state: State<T>) {
+        self.states.push(new_state);
+        self.current_state = self.states.len();
+    }
 }
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::test::mock_board;
+    use crate::test::mock_board::MockBoard;
 
+    #[test]
     fn should_create_history() {
-        let hist = History<>::new();
+        let board = MockBoard::new();
+        let init_state = State::new(board);
+        let hist = History::<MockBoard>::new(init_state);
+
+        assert_eq!(hist.current_state, 0);
+        assert_eq!(hist.states.len(), 1);
+        assert_eq!(hist.state().turn_count, 0);
     }
+
 }

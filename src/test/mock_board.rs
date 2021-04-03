@@ -1,44 +1,46 @@
-use crate::boards::board::Board;
+use crate::boards::board::{Board, Occupant, Square};
 
 
-    struct MockBoard {
+pub struct MockBoard {
+    board: String,
+}
 
-    }
-
-    impl Board for TestBoard {
-        fn new() -> Self {
-        todo!()
+impl Board for MockBoard {
+    fn new() -> Self {
+        Self {
+            board: "Mock".to_string()
         }
+    }
 
-        fn from_fen(fen_str: &str) -> Self {
+    fn from_fen(fen_str: &str) -> Self {
         todo!()
     }
 
-        fn from_pgn(fen_str: &str) -> Self {
+    fn from_pgn(fen_str: &str) -> Self {
         todo!()
     }
 
-        fn from_8x8_str(str: &str) -> Self {
+    fn from_8x8_str(str: &str) -> Self {
         todo!()
     }
 
-        fn to_fen() -> String {
+    fn to_fen() -> String {
         todo!()
     }
 
-        fn to_pgn() -> String {
+    fn to_pgn() -> String {
         todo!()
     }
 
-        fn to_8x8_str() -> String {
+    fn to_8x8_str() -> String {
         todo!()
     }
 
-        fn get(&self, square: crate::boards::board::Square) -> crate::boards::board::Occupant {
-        todo!()
+    fn get(&self, square: Square) -> Occupant {
+        Occupant::Piece("K".to_string())
     }
 
-        fn print(&self) {
+    fn print(&self) {
         todo!()
     }
-    }
+}

@@ -20,7 +20,7 @@ impl Board for ABoard {
             ]
         }
     }
-    
+
     fn from_fen(fen_str: &str) -> Self {
         todo!()
     }
@@ -81,6 +81,7 @@ mod test {
     use super::*;
     use super::super::board_utils::str_to_square;
 
+    #[test]
     fn test_should_retrun_white_king() {
         let board = ABoard::new();
         let occupant = board.get(str_to_square("e1"));

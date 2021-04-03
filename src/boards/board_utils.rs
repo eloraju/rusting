@@ -70,6 +70,7 @@ pub fn s(s:&str) -> String {
 mod tests{
     use super::*;
 
+    #[test]
     fn str_to_square_should_return_square() {
         let str = "e4";
         let square = str_to_square(str);

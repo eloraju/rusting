@@ -7,20 +7,20 @@ pub enum Turn {
 
 
 pub struct State<T: Board> {
-    en_passant: Option<Square>,
-    w_k_castle: bool,
-    w_q_castle: bool,
-    b_k_castle: bool,
-    b_q_castle: bool,
-    turn_count: u16,
-    turn: Turn,
-    board: T
+    pub en_passant: Option<Square>,
+    pub w_k_castle: bool,
+    pub w_q_castle: bool,
+    pub b_k_castle: bool,
+    pub b_q_castle: bool,
+    pub turn_count: u16,
+    pub turn: Turn,
+    pub board: T
 }
 
 
 impl<T> State<T> 
 where T: Board {
-    fn new(board: T) -> Self {
+    pub fn new(board: T) -> Self {
         Self {
             en_passant: None,
             w_k_castle: true,
