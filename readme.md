@@ -35,8 +35,14 @@ I'll post small updates on what is happening with the engine
 
 Started the project! I did have a idea of what Rust is and that helped to get me even this far. In the span of about 8 hours I managed to read up quite a bit on how a chess engine works and what is actually needed to have a workign engine. A bug free core is mentioned multiple times soooo... Tests? I also managed to create the first iteration of the board representation. At first I really wanted to create a bitboard, but that proved to be a bit too much to take in this early on. I decided to make this first go a bit easier for myself and pivoted to using just multi-dimensional array. Once I did that it took me maybe a couple of hours to get to the point where I had the program spewing the board into the terminal! Next up I should come up with a way to initialize the board with a custom state. Gotta look into PGN and FEN.. Maybe I'll start with just a string or array of strings? I would like to see how IO works with rust so maybe a text file with 8x8 char matrix?
 
-### 22-03-30
+### 21-03-30
 
 Didn't have that much time today. Bascially just spent my time refactoring the whole thing a bit and trying to come up with a way to represent board history neatly. Initial idea was to have the whole Game object be a doubly linked list that one could easily traverse but that turned out to be easier to thin that to implement. I've left the codebase in shatters for now. Maybe I'll figure something out over easter.
 
 Maybe I'll just have to KISS and revert back to what I had before, create a FEN/PGN parser and go from there towards the puzzle solver idea I had yesterday.
+
+### 21-04-(02-03)
+
+Whooa boi. Did a whole lot of refactoring. Read and watched some tutorials about modules and testing and decided to give them a go. At the moment I feel like I made good decisions but I'll take another look into this in the evening. Then I'll know for sure. I know that the regex tests are failing but I'll address that in the evening.
+
+Special thanks to [@murtsi](https://github.com/katis) for telling me about the vector/index implementation of linked lists. I did expand on the idea a bit but time will tell whether my contributions were any good :D
