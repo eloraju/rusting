@@ -22,7 +22,15 @@ impl Board for ABoard {
     }
 
     fn from_fen(fen_str: &str) -> Self {
-        todo!()
+        let ranks: Vec<&str> = fen_str.split("/");
+
+        for file in ranks {
+            for square in file.chars() {
+                // rnbqkp -> piece
+                // number -> n*empty square
+            }
+        }
+
     }
 
     fn from_pgn(fen_str: &str) -> Self {
