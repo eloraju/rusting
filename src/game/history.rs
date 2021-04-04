@@ -1,13 +1,13 @@
-use crate::Board;
+use crate::Engine;
 use super::state::State;
 
-pub struct History<T: Board>{
+pub struct History<T: Engine>{
     current_state: usize,
     states: Vec<State<T>>
 }
 
 impl<T> History<T> 
-where T: Board
+where T: Engine
 {
     fn new(init_state: State<T>) -> Self {
         let mut inst = Self {

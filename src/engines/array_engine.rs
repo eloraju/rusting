@@ -1,11 +1,12 @@
-use super::{board::{Board, Square, Occupant}, board_utils::file_to_number};
+use super::{board::{Engine, Square, Occupant}, board_utils::file_to_number};
 use super::board_utils::{char_to_piece,s};
+use regex::Regex;
 
 pub struct ABoard {
     board: [[String; 8]; 8],
 }
 
-impl Board for ABoard {
+impl Engine for ABoard {
     fn new() -> Self {
         Self {
             board: [
@@ -23,14 +24,35 @@ impl Board for ABoard {
 
     fn from_fen(fen_str: &str) -> Self {
         let ranks: Vec<&str> = fen_str.split("/");
+        let board = [[" ".to_string(); 8]; 8];
 
-        for file in ranks {
-            for square in file.chars() {
-                // rnbqkp -> piece
-                // number -> n*empty square
+
+        for (r_index, file) in ranks.iter().enumerate() {
+        }
+
+        return Self {
+            board
+        }
+
+    }
+
+    fn parse_rank(rank: &str) -> [String;8] {
+        lazy_static! {
+            static ref PIECE_RE: Regex = Regex::new(r"[rnbqkpRNBQKP]").unwrap();
+        }
+
+        let rank_arr = rank.chars().collect::<Vec<char>>();
+        let mut result = [String: 8];
+        let mut space_counter = 0;
+        for index in 0..8 {
+            if space_counter > 0 {
+                space_counter -= 1;
+                result[index] = " ".to_string();
+                continue;
             }
         }
 
+        return result;
     }
 
     fn from_pgn(fen_str: &str) -> Self {
@@ -96,5 +118,13 @@ mod test {
         let white_king = Occupant::Piece(s("K"));
 
         assert_eq!(occupant, white_king);
+    }
+
+    #[test]
+    fn should_parse_rank_correctly() {
+        let rank_str = "r2P3r";
+        let correct_rank: [String; 8] = [s("r"),s(" "),s(" "),s("P"),s(" "),s(" "),s(" "),s("r")];
+        let parsed_rank = parse_rank(rank_str);
+        assert_eq!(parsed_rank, correct_rank);
     }
 }

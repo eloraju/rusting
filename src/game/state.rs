@@ -1,4 +1,4 @@
-use crate::Board;
+use crate::Engine;
 use crate::boards::board::Square;
 pub enum Turn {
     WHITE,
@@ -6,7 +6,7 @@ pub enum Turn {
 }
 
 
-pub struct State<T: Board> {
+pub struct State<T: Engine> {
     pub en_passant: Option<Square>,
     pub w_k_castle: bool,
     pub w_q_castle: bool,
@@ -19,7 +19,7 @@ pub struct State<T: Board> {
 
 
 impl<T> State<T> 
-where T: Board {
+where T: Engine {
     pub fn new(board: T) -> Self {
         Self {
             en_passant: None,

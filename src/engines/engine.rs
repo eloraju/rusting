@@ -27,8 +27,10 @@ pub enum Occupant {
     Piece(String)
 }
 
-pub trait Board {
+pub trait Engine {
     fn new() -> Self;
+
+    // Board generation
     fn from_fen(fen_str: &str) -> Self;
     fn from_pgn(fen_str: &str) -> Self;
     fn from_8x8_str(str: &str) -> Self;
@@ -36,5 +38,9 @@ pub trait Board {
     fn to_pgn() -> String;
     fn to_8x8_str() -> String;
     fn get(&self, square: Square) -> Occupant;
+
+    // Move generation
+    // Position evalution
+
     fn print(&self);
 }

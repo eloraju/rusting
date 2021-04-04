@@ -1,7 +1,7 @@
-mod boards;
+mod engines;
 mod test;
-use boards::array_board::ABoard;
-use boards::board::Board;
+use engines::array_engine::ABoard;
+use engines::engine::Engine;
 
 #[macro_use]
 extern crate lazy_static;

@@ -1,11 +1,11 @@
-use crate::boards::board::{Board, Occupant, Square};
+use crate::boards::board::{Engine, Occupant, Square};
 
 
 pub struct MockBoard {
     board: String,
 }
 
-impl Board for MockBoard {
+impl Engine for MockBoard {
     fn new() -> Self {
         Self {
             board: "Mock".to_string()
