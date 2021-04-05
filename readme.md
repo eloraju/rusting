@@ -50,3 +50,11 @@ Special thanks to [@murtsi](https://github.com/katis) for telling me about the v
 #### Evening update
 
 Didn't spend that much time on this. Fixed the failing test - or rather fixed my code - and started to work on FEN parsing.
+
+### 21-04-05
+
+Once again... I refactored the whole thing :D
+
+This time around I think I'm quite satisfied with the results. I moved some code around and created much more sense-making structure for the whole codebase. I also created a struct to represent pieces, since playing with strings turned out to be a major pain in my ass... I think that it didn't help that I had `String`, `&str` and `char`types being used nigh interchangeably. Needles to say that that caused more than a couple issues. All that should now be things of the past. I also managed to get FEN-parsing to work when reading the board state in! Yay! Next up I'll try and get the array-based engine to ouput its board state as FEN!
+
+I'll still need to refactor the history/state representation a bit. The engine should have a History-field that holds its state and not the other way around... I think this confusion comes from the fact that at one point I thought I could represent the board as a single entity, rather than it being part of the whole engine's state.
