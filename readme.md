@@ -27,7 +27,7 @@ I need to be able to
 Sillyness aside, I should be able to build this thing more or less incrementally. Starting with initializing a board and coming up with a way to print out the board to the terminal. After that's done I might move on to inputting moves (no validation yet). My initial idea was to have the engine run as a daemon and then using commands like `rce Ne5 (move knight to E5)` trying to move a piece on the board. That would be extremely cool since with those two features and a way of importing chess puzzles, I could create a terminal chess puzzle program! I don't have to validate the moves, just check whether the move is the one the puzzle is looking for or not. 
 
 
-## Developemnt
+## Development
 
 I'll post small updates on what is happening with the engine
 
