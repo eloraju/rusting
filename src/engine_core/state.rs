@@ -1,5 +1,7 @@
-use crate::Engine;
-use crate::boards::board::Square;
+use super::{
+    engine::Engine,
+    square::Square,
+};
 pub enum Turn {
     WHITE,
     BLACK

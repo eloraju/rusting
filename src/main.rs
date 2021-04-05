@@ -1,14 +1,7 @@
-mod engines;
-mod test;
-use engines::array_engine::ABoard;
-use engines::engine::Engine;
-
-#[macro_use]
-extern crate lazy_static;
-
-mod game;
+use rusty::array_engine::engine::AEngine;
+use rusty::engine_core::engine::Engine;
 
 fn main() {
-    let board  = ABoard::new();
+    let board  = AEngine::new();
     board.print();
 }

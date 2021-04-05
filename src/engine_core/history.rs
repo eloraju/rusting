@@ -1,5 +1,7 @@
-use crate::Engine;
-use super::state::State;
+use super::{
+    state::State,
+    engine::Engine
+};
 
 pub struct History<T: Engine>{
     current_state: usize,
@@ -52,13 +54,13 @@ where T: Engine
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::test::mock_board::MockBoard;
+    use crate::test::mock_engine::MockEngine;
 
     #[test]
     fn should_create_history() {
-        let board = MockBoard::new();
+        let board = MockEngine::new();
         let init_state = State::new(board);
-        let hist = History::<MockBoard>::new(init_state);
+        let hist = History::<MockEngine>::new(init_state);
 
         assert_eq!(hist.current_state, 0);
         assert_eq!(hist.states.len(), 1);
