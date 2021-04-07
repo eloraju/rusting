@@ -2,7 +2,7 @@ use std::convert::TryInto;
 use regex::Regex;
 
 use crate::engine_core::{
-    piece::Piece,
+    piece_old::Piece,
     square::Square
 };
 
@@ -28,4 +28,15 @@ pub fn str_to_square(square: &str) -> Square {
     let rank = caps["rank"].parse::<usize>().unwrap();
 
     return Square::new(file, rank)
+}
+
+#[cfg(test)]
+mod test {
+    use crate::test::{
+    };
+    #[test]
+    fn sanity_str_to_square() {
+        
+    }
+    
 }

@@ -1,6 +1,6 @@
 use crate::engine_core::{
     engine::Engine,
-    piece::{
+    piece_old::{
         Piece,
         p
     },
@@ -21,27 +21,27 @@ impl Engine for MockEngine {
         }
     }
 
-    fn board_from_fen(fen_str: &str) -> Self {
+    fn board_state_from_fen(fen_str: &str) -> Self {
         todo!()
     }
 
-    fn board_from_pgn(fen_str: &str) -> Self {
+    fn board_state_from_pgn(fen_str: &str) -> Self {
         todo!()
     }
 
-    fn board_from_8x8_str(str: &str) -> Self {
+    fn board_state_from_8x8_str(str: &str) -> Self {
         todo!()
     }
 
-    fn board_to_fen(&self) -> String {
+    fn board_state_to_fen(&self) -> String {
         todo!()
     }
 
-    fn board_to_pgn(&self) -> String {
+    fn board_state_to_pgn(&self) -> String {
         todo!()
     }
 
-    fn board_to_8x8_str(&self) -> String {
+    fn board_state_to_8x8_str(&self) -> String {
         todo!()
     }
 

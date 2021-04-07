@@ -1,5 +1,5 @@
 use crate::engine_core::{
-    piece::{
+    piece_old::{
         Piece,
         p
     },
@@ -35,7 +35,7 @@ impl Engine for AEngine {
         }
     }
 
-    fn board_from_fen(fen_str: &str) -> Self {
+    fn board_state_from_fen(fen_str: &str) -> Self {
         let ranks: Vec<&str> = fen_str.split("/").collect();
 
         let mut board: Vec<[Piece;8]> = Vec::new();
@@ -52,15 +52,15 @@ impl Engine for AEngine {
     }
 
 
-    fn board_from_pgn(fen_str: &str) -> Self {
+    fn board_state_from_pgn(fen_str: &str) -> Self {
         todo!()
     }
 
-    fn board_from_8x8_str(str: &str) -> Self {
+    fn board_state_from_8x8_str(str: &str) -> Self {
         todo!()
     }
 
-    fn board_to_fen(&self) -> String {
+    fn board_state_to_fen(&self) -> String {
         for rank in self.board.iter() {
             
         }
@@ -68,11 +68,11 @@ impl Engine for AEngine {
         return s("");
     }
 
-    fn board_to_pgn(&self) -> String {
+    fn board_state_to_pgn(&self) -> String {
         todo!()
     }
 
-    fn board_to_8x8_str(&self) -> String {
+    fn board_state_to_8x8_str(&self) -> String {
         todo!()
     }
 
@@ -107,9 +107,13 @@ impl Engine for AEngine {
 #[cfg(test)]
 mod test {
     use crate::engine_core::{
-        piece::{Piece,p},
+        piece_old::{Piece,p},
         square::Square,
     };
+    use crate::test::{
+        mocks::mock_board_states::get_test_board_state,
+    };
+
     use super::{
         *,
         super::helpers::str_to_square,
@@ -124,19 +128,6 @@ mod test {
         let square = str_to_square(str);
         let expected = Square::new("e", 4);
         assert_eq!(square, expected);
-    }
-
-    fn get_test_board() -> [[Piece;8]; 8] {
-        [
-                [p("R"),p(" "),p(" "),p("Q"),p(" "),p("R"),p("K"),p(" ")],
-                [p("P"),p("P"),p(" "),p("N"),p(" "),p(" "),p("B"),p(" ")],
-                [p(" "),p(" "),p("P"),p(" "),p(" "),p(" "),p("B"),p(" ")],
-                [p(" "),p(" "),p(" "),p("P"),p(" "),p("P"),p(" "),p("P")],
-                [p(" "),p(" "),p(" "),p("p"),p(" "),p(" "),p("P"),p(" ")],
-                [p("p"),p(" "),p("n"),p(" "),p("p"),p(" "),p("p"),p(" ")],
-                [p(" "),p("p"),p(" "),p("n"),p("b"),p("p"),p("p"),p(" ")],
-                [p("r"),p(" "),p("q"),p(" "),p("r"),p(" "),p("k"),p(" ")],
-            ]
     }
 
     #[test]
@@ -160,16 +151,16 @@ mod test {
     fn should_parse_fen_state() {
         let fen_state = "r1q1r1k1/1p1nbpp1/p1n1p1p1/3p2P1/3P1P1P/2P3B1/PP1N2B1/R2Q1RK1";
 
-        let engine = AEngine::board_from_fen(fen_state);
+        let engine = AEngine::board_state_from_fen(fen_state);
 
         engine.print();
 
-        assert_eq!(engine.board, get_test_board());
+        assert_eq!(engine.board, get_test_board_state());
     }
 
     #[test]
     fn should_output_fen_rank() {
-        let test_rank = &get_test_board()[7];
+        let test_rank = &get_test_board_state()[7];
         let output = rank_to_fen(&test_rank);
         let result = "r1q1r1k1";
 

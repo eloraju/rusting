@@ -1,8 +1,8 @@
 use regex::Regex;
 use crate::engine_core::{
-    piece::{Piece, p},
+    piece_old::{Piece, p},
+    helpers::vec_to_arr
 };
-use super::helpers::vec_rank_to_arr;
 
 pub fn parse_rank(rank: &str) -> [Piece;8] {
     lazy_static! {
@@ -25,7 +25,7 @@ pub fn parse_rank(rank: &str) -> [Piece;8] {
         collector.push(p(&char.to_string()));
     }
 
-    let result: [Piece; 8] = vec_rank_to_arr(collector);
+    let result: [Piece; 8] = vec_to_arr(collector);
     return result;
 }
 
@@ -38,4 +38,18 @@ pub fn rank_to_fen(rank: &[Piece; 8]) -> String {
    }
 
    return result;
+}
+
+#[cfg(test)]
+mod test {
+    #[test]
+    fn rank_to_fen(){
+        
+    }
+
+    #[test]
+    fn parse_rank(){
+        
+
+    }
 }

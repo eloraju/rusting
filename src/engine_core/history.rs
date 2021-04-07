@@ -54,7 +54,11 @@ where T: Engine
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::test::mock_engine::MockEngine;
+    use crate::test::{
+        mocks::{
+            mock_engine::MockEngine
+        }
+    };
 
     #[test]
     fn should_create_history() {
