@@ -1,5 +1,4 @@
 pub mod engine;
-pub mod piece_old;
 pub mod piece;
 pub mod square;
 pub mod state;

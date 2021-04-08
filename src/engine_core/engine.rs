@@ -1,6 +1,6 @@
 use super::{
     square::Square,
-    piece_old::Piece
+    piece::Piece
 };
 
 pub trait Engine {

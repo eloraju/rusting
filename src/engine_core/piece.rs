@@ -40,7 +40,7 @@ pub fn p(notation: &str) -> Piece {
     }
 }
 
-pub fn p_to_notation(p: Piece) -> String {
+pub fn p_to_notation(p: &Piece) -> String {
     match p {
         Piece::King(Color::White)   => s("K"),
         Piece::Queen(Color::White)  => s("Q"),
@@ -59,7 +59,7 @@ pub fn p_to_notation(p: Piece) -> String {
     }
 }
 
-pub fn p_to_utf(p: Piece) -> String {
+pub fn p_to_utf(p: &Piece) -> String {
     match p {
         Piece::King(Color::White)   => s("♔"),
         Piece::Queen(Color::White)  => s("♕"),
@@ -96,7 +96,7 @@ mod test {
     #[test]
     fn should_get_notation() {
         let input = Piece::Knight(Color::White);
-        let output = p_to_notation(input);
+        let output = p_to_notation(&input);
         let expected = s("N");
 
         assert_eq!(output, expected);
@@ -106,7 +106,7 @@ mod test {
     fn should_get_utf() {
         let expected = s("♟︎");
         let input = Piece::Pawn(Color::Black);
-        let output = p_to_utf(input);
+        let output = p_to_utf(&input);
 
         assert_eq!(output, expected);
     }

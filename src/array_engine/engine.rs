@@ -1,7 +1,9 @@
 use crate::engine_core::{
-    piece_old::{
+    piece::{
         Piece,
-        p
+        p,
+        p_to_utf,
+        p_to_notation,
     },
     square::Square,
     engine::Engine,
@@ -80,7 +82,7 @@ impl Engine for AEngine {
         for row in 0..8 {
             println!("       ---------------------------------");
             for rank in 0..8{
-                let piece = &self.board[row][rank].utf_piece;
+                let piece = p_to_utf(&self.board[row][rank]);
                 match rank {
                     0 => print!("     {} | {} | ", 8 - row, piece),
                     7 => println!("{} |", piece),
@@ -107,7 +109,7 @@ impl Engine for AEngine {
 #[cfg(test)]
 mod test {
     use crate::engine_core::{
-        piece_old::{Piece,p},
+        piece::{Piece,p},
         square::Square,
     };
     use crate::test::{
@@ -136,7 +138,7 @@ mod test {
         let occupant = board.get_square_occupant(str_to_square("e1"));
         let white_king = p("K");
 
-        assert_eq!(occupant.notation, white_king.notation);
+        assert_eq!(p_to_notation(&occupant), p_to_notation(&white_king));
     }
 
     #[test]
@@ -158,12 +160,4 @@ mod test {
         assert_eq!(engine.board, get_test_board_state());
     }
 
-    #[test]
-    fn should_output_fen_rank() {
-        let test_rank = &get_test_board_state()[7];
-        let output = rank_to_fen(&test_rank);
-        let result = "r1q1r1k1";
-
-        assert_eq!(output, result)
-    }
 }

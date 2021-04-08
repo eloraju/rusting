@@ -1,7 +1,9 @@
+use core::panic;
+
 use regex::Regex;
 use crate::engine_core::{
-    piece_old::{Piece, p},
-    helpers::vec_to_arr
+    piece::{Piece, p, p_to_notation},
+    helpers::{vec_to_arr, s}
 };
 
 pub fn parse_rank(rank: &str) -> [Piece;8] {
@@ -35,21 +37,46 @@ pub fn rank_to_fen(rank: &[Piece; 8]) -> String {
    let mut result = String::new();
    
    for square in rank.iter() {
+       match square {
+           Piece::Empty => space_count += 1,
+           Piece::Error => panic!("Yikes!"),
+           _ => {
+               result.push_str(&fenify(space_count, &p_to_notation(square)))
+           }
+       }
    }
 
    return result;
 }
 
+fn fenify(spaces: i32, piece: &str) -> String {
+    if spaces > 0 {
+        let space_str = spaces.to_string();
+        return space_str;
+    } else {
+        return piece.to_string();
+    }
+}
+
 #[cfg(test)]
 mod test {
+    use super::*;
+    use crate::{test::mocks::mock_board_states::get_test_board_state};
+
     #[test]
-    fn rank_to_fen(){
-        
+    fn should_parse_fen_rank() {
+        let rank_str = "r2P3r";
+        let correct_rank: [Piece; 8] = [p("r"),p(" "),p(" "),p("P"),p(" "),p(" "),p(" "),p("r")];
+        let parsed_rank = parse_rank(rank_str);
+        assert_eq!(parsed_rank, correct_rank);
     }
 
     #[test]
-    fn parse_rank(){
-        
+    fn should_output_fen_rank() {
+        let test_rank = &get_test_board_state()[7];
+        let output = rank_to_fen(&test_rank);
+        let result = "r1q1r1k1";
 
+        assert_eq!(output, result)
     }
 }

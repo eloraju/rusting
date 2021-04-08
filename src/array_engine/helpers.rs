@@ -2,7 +2,7 @@ use std::convert::TryInto;
 use regex::Regex;
 
 use crate::engine_core::{
-    piece_old::Piece,
+    piece::Piece,
     square::Square
 };
 
