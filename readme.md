@@ -62,3 +62,7 @@ I'll still need to refactor the history/state representation a bit. The engine s
 ##### Just popping this in here
 
 [UCI](http://wbec-ridderkerk.nl/html/UCIProtocol.html) seems like something that would be nice to implement in the not-so-near future. Albeit one needs a functional engine before there's any point in trying to implement the UCI... But that would mean that the engine could be plopped into existing UIs...
+
+### 21-04- (06-10)
+
+What a week. Didn't have time to dig deep into this but managed to do small things here and there. Surprise to no one, I refactored the whole thing even more. Now the FEN parsing is a module of it's own. I also moved aroudn the existing tests to places where they made more sense. I also managed to get the program to parse it's own state to FEN notation. Yay! I'll try and work on the `State` and `History` modules a bit so I could have the FEN parsing parse the whole game state rather than just the board state. Once those two are in a reasonable state, I can start working on the PGN parsing. Maybe once THAT is done I can move on with the actual engine stuff :D
