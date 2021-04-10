@@ -21,6 +21,38 @@ pub enum Piece {
     Error
 }
 
+impl std::fmt::Display for Piece {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", piece_to_str(&self))
+    }
+}
+
+impl std::fmt::Display for Color {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", color_to_str(self))
+    }
+}
+
+pub fn color_to_str(col: &Color) -> String {
+    match col {
+        Color::Black => "Black".to_string(),
+        Color::White => "White".to_string(),
+        Color::None => "None".to_string(),
+    }
+}
+pub fn piece_to_str(piece: &Piece) -> String {
+    match piece {
+        Piece::King(c) => format!("{} King", c),
+        Piece::Queen(c) => format!("{} Queen", c),
+        Piece::Rook(c) => format!("{} Rook", c),
+        Piece::Bishop(c) => format!("{} Bishop", c),
+        Piece::Knight(c) => format!("{} Knight", c),
+        Piece::Pawn(c) => format!("{} Pawn", c),
+        Piece::Empty => "Empty".to_string(),
+        Piece::Error => "!ERROR!".to_string(),
+    }
+}
+
 pub fn p(notation: &str) -> Piece {
     match notation {
         "K" => Piece::King(Color::White),

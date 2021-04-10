@@ -1,17 +1,14 @@
 use super::{
     state::State,
-    engine::Engine
 };
 
-pub struct History<T: Engine>{
+pub struct History<BoardType>{
     current_state: usize,
-    states: Vec<State<T>>
+    states: Vec<State<BoardType>>
 }
 
-impl<T> History<T> 
-where T: Engine
-{
-    fn new(init_state: State<T>) -> Self {
+impl<BoardType> History<BoardType> {
+    pub fn new(init_state: State<BoardType>) -> Self {
         let mut inst = Self {
             current_state: 0,
             states: Vec::new(),
@@ -21,22 +18,22 @@ where T: Engine
         return inst;
     }
 
-    fn state(&self) -> &State<T> {
+    pub fn state(&self) -> &State<BoardType> {
         &self.states[self.current_state]
     }
 
-    fn next(&mut self) -> Option<&State<T>> {
+    pub fn next(&mut self) -> Option<&State<BoardType>> {
         let next = &self.current_state + 1;
         return self.go_to(next);
     }
 
-    fn prev(&mut self) -> Option<&State<T>> {
+    pub fn prev(&mut self) -> Option<&State<BoardType>> {
         let next = &self.current_state - 1;
         return self.go_to(next);
     }
 
 
-    fn go_to(&mut self, index: usize) -> Option<&State<T>> {
+    pub fn go_to(&mut self, index: usize) -> Option<&State<BoardType>> {
         let next_state = self.states.get(index);
         if next_state.is_some() {
             self.current_state = index;
@@ -46,7 +43,7 @@ where T: Engine
     }
 
     // Mutation galore...
-    fn push(&mut self, new_state: State<T>) {
+    pub fn push(&mut self, new_state: State<BoardType>) {
         self.states.push(new_state);
         self.current_state = self.states.len();
     }
@@ -54,10 +51,13 @@ where T: Engine
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::test::{
-        mocks::{
-            mock_engine::MockEngine
-        }
+    use crate::{
+        test::{
+            mocks::{
+                mock_engine::MockEngine
+            },
+        },
+        engine_core::engine::Engine,
     };
 
     #[test]

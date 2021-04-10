@@ -32,11 +32,13 @@ pub fn str_to_square(square: &str) -> Square {
 
 #[cfg(test)]
 mod test {
-    use crate::test::{
-    };
+    use super::*;
+
     #[test]
-    fn sanity_str_to_square() {
-        
+    fn str_to_square_should_return_square() {
+        let str = "e4";
+        let square = str_to_square(str);
+        let expected = Square::new("e", 4);
+        assert_eq!(square, expected);
     }
-    
 }

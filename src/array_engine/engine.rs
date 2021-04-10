@@ -1,30 +1,30 @@
-use crate::engine_core::{
+use crate::engine_core::{engine::Engine, helpers::{
+        file_to_number,
+    },
+    history::History,
+    state::State,
+    square::Square,
     piece::{
         Piece,
         p,
         p_to_utf,
-        p_to_notation,
-    },
-    square::Square,
-    engine::Engine,
-    helpers::{
-        file_to_number,
-        vec_to_arr,
-        s,
-    }
+    }, 
 };
 
-use super::{fen_helpers::parse_rank};
+use super::{fen::{
+    input::fen_to_board,
+    output::board_to_fen
+}};
 
 
 pub struct AEngine {
-    board: [[Piece; 8]; 8],
+    history: History<[[Piece; 8]; 8]>
 }
 
-impl Engine for AEngine {
+impl Engine<[[Piece; 8]; 8]> for AEngine {
     fn new() -> Self {
         Self {
-            board: [
+            history: History::new(State::new([
                 [p("R"),p("N"),p("B"),p("Q"),p("K"),p("B"),p("N"),p("R")],
                 [p("P"),p("P"),p("P"),p("P"),p("P"),p("P"),p("P"),p("P")],
                 [p(" "),p(" "),p(" "),p(" "),p(" "),p(" "),p(" "),p(" ")],
@@ -33,48 +33,31 @@ impl Engine for AEngine {
                 [p(" "),p(" "),p(" "),p(" "),p(" "),p(" "),p(" "),p(" ")],
                 [p("p"),p("p"),p("p"),p("p"),p("p"),p("p"),p("p"),p("p")],
                 [p("r"),p("n"),p("b"),p("q"),p("k"),p("b"),p("n"),p("r")],
-            ]
+            ]))
         }
     }
 
-    fn board_state_from_fen(fen_str: &str) -> Self {
-        let ranks: Vec<&str> = fen_str.split("/").collect();
+    fn board(&self) -> &[[Piece; 8]; 8] {
+        &self.history.state().board
+    }
 
-        let mut board: Vec<[Piece;8]> = Vec::new();
-
-        for rank in ranks {
-            board.push(parse_rank(rank));
-        }
-
-        board.reverse();
-
+    fn state_from_fen(fen_str: &str) -> Self {
         return Self {
-            board: vec_to_arr(board)
+            history: History::new(State::new(fen_to_board(fen_str)))
         }
     }
 
 
-    fn board_state_from_pgn(fen_str: &str) -> Self {
+    fn state_from_pgn(pgn_str: &str) -> Self {
         todo!()
     }
 
-    fn board_state_from_8x8_str(str: &str) -> Self {
-        todo!()
+    fn state_to_fen(&self) -> String {
+        // TODO: Convert rest of the state into fed. This is just the board
+        return board_to_fen(&self.board());
     }
 
-    fn board_state_to_fen(&self) -> String {
-        for rank in self.board.iter() {
-            
-        }
-
-        return s("");
-    }
-
-    fn board_state_to_pgn(&self) -> String {
-        todo!()
-    }
-
-    fn board_state_to_8x8_str(&self) -> String {
+    fn state_to_pgn(&self) -> String {
         todo!()
     }
 
@@ -82,7 +65,7 @@ impl Engine for AEngine {
         for row in 0..8 {
             println!("       ---------------------------------");
             for rank in 0..8{
-                let piece = p_to_utf(&self.board[row][rank]);
+                let piece = p_to_utf(&self.board()[row][rank]);
                 match rank {
                     0 => print!("     {} | {} | ", 8 - row, piece),
                     7 => println!("{} |", piece),
@@ -99,7 +82,7 @@ impl Engine for AEngine {
         // calculate the correct rank. No biggie
         let rank_index = square.rank - 1;
         let file_index = file_to_number(&square.file);
-        let occupant = &self.board[rank_index][file_index];
+        let occupant = &self.board()[rank_index][file_index];
 
         return occupant;
     }
@@ -109,28 +92,16 @@ impl Engine for AEngine {
 #[cfg(test)]
 mod test {
     use crate::engine_core::{
-        piece::{Piece,p},
-        square::Square,
-    };
-    use crate::test::{
-        mocks::mock_board_states::get_test_board_state,
+        piece::{p, p_to_notation},
+        engine::Engine
     };
 
     use super::{
-        *,
-        super::helpers::str_to_square,
-        super::fen_helpers::{
-            rank_to_fen
+        AEngine,
+        super:: {
+            helpers::{str_to_square},
         }
     };
-
-    #[test]
-    fn str_to_square_should_return_square() {
-        let str = "e4";
-        let square = str_to_square(str);
-        let expected = Square::new("e", 4);
-        assert_eq!(square, expected);
-    }
 
     #[test]
     fn test_should_retrun_white_king() {
@@ -140,24 +111,4 @@ mod test {
 
         assert_eq!(p_to_notation(&occupant), p_to_notation(&white_king));
     }
-
-    #[test]
-    fn should_parse_fen_rank() {
-        let rank_str = "r2P3r";
-        let correct_rank: [Piece; 8] = [p("r"),p(" "),p(" "),p("P"),p(" "),p(" "),p(" "),p("r")];
-        let parsed_rank = parse_rank(rank_str);
-        assert_eq!(parsed_rank, correct_rank);
-    }
-
-    #[test]
-    fn should_parse_fen_state() {
-        let fen_state = "r1q1r1k1/1p1nbpp1/p1n1p1p1/3p2P1/3P1P1P/2P3B1/PP1N2B1/R2Q1RK1";
-
-        let engine = AEngine::board_state_from_fen(fen_state);
-
-        engine.print();
-
-        assert_eq!(engine.board, get_test_board_state());
-    }
-
 }

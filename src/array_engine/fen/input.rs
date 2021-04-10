@@ -1,9 +1,8 @@
-use core::panic;
 
 use regex::Regex;
 use crate::engine_core::{
-    piece::{Piece, p, p_to_notation},
-    helpers::{vec_to_arr, s}
+    piece::{Piece, p},
+    helpers::vec_to_arr
 };
 
 pub fn parse_rank(rank: &str) -> [Piece;8] {
@@ -31,37 +30,27 @@ pub fn parse_rank(rank: &str) -> [Piece;8] {
     return result;
 }
 
-// This function should not consume the values it is given
-pub fn rank_to_fen(rank: &[Piece; 8]) -> String {
-   let mut space_count = 0;
-   let mut result = String::new();
-   
-   for square in rank.iter() {
-       match square {
-           Piece::Empty => space_count += 1,
-           Piece::Error => panic!("Yikes!"),
-           _ => {
-               result.push_str(&fenify(space_count, &p_to_notation(square)))
-           }
-       }
-   }
-
-   return result;
-}
-
-fn fenify(spaces: i32, piece: &str) -> String {
-    if spaces > 0 {
-        let space_str = spaces.to_string();
-        return space_str;
-    } else {
-        return piece.to_string();
+pub fn fen_to_board(fen_str: &str) -> [[Piece; 8];8] {
+    let ranks: Vec<&str> = fen_str.split("/").collect();
+    let mut board: Vec<[Piece;8]> = Vec::new();
+    for rank in ranks {
+        board.push(parse_rank(rank));
     }
+
+    board.reverse();
+
+    return vec_to_arr(board);
 }
 
 #[cfg(test)]
 mod test {
     use super::*;
-    use crate::{test::mocks::mock_board_states::get_test_board_state};
+    use crate::{
+        test::mocks::mock_board_states::{
+            get_test_board_state,
+            get_test_fen
+        },
+    };
 
     #[test]
     fn should_parse_fen_rank() {
@@ -72,11 +61,9 @@ mod test {
     }
 
     #[test]
-    fn should_output_fen_rank() {
-        let test_rank = &get_test_board_state()[7];
-        let output = rank_to_fen(&test_rank);
-        let result = "r1q1r1k1";
-
-        assert_eq!(output, result)
+    fn should_parse_fen_to_board() {
+        let board_str = get_test_fen();
+        let parsed_board = fen_to_board(&board_str);
+        assert_eq!(parsed_board, get_test_board_state());
     }
 }

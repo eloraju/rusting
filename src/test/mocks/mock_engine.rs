@@ -7,45 +7,39 @@ use crate::engine_core::{
     square::Square,
 };
 
-
 pub struct MockEngine {
-    board: String,
+    _board: String,
     white_king: Piece
 }
-
-impl Engine for MockEngine {
+impl Engine<String> for MockEngine {
     fn new() -> Self {
         Self {
-            board: "Mock".to_string(),
+            _board: "Mock".to_string(),
             white_king: p("K")
         }
     }
 
-    fn board_state_from_fen(fen_str: &str) -> Self {
+    fn board(&self) -> &String {
+        &self._board
+    }
+
+    fn state_from_fen(_fen_str: &str) -> Self {
         todo!()
     }
 
-    fn board_state_from_pgn(fen_str: &str) -> Self {
+    fn state_from_pgn(_fen_str: &str) -> Self {
         todo!()
     }
 
-    fn board_state_from_8x8_str(str: &str) -> Self {
+    fn state_to_fen(&self) -> String {
         todo!()
     }
 
-    fn board_state_to_fen(&self) -> String {
+    fn state_to_pgn(&self) -> String {
         todo!()
     }
 
-    fn board_state_to_pgn(&self) -> String {
-        todo!()
-    }
-
-    fn board_state_to_8x8_str(&self) -> String {
-        todo!()
-    }
-
-    fn get_square_occupant(&self, square: Square) -> &Piece {
+    fn get_square_occupant(&self, _square: Square) -> &Piece {
         &self.white_king
     }
 
