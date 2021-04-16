@@ -51,14 +51,14 @@ mod test {
     use super::*;
     use crate::{
         test::mocks::mock_board_states::{
-            get_test_board_state,
+            get_mock_board_state,
             get_test_fen
         }
     };
 
     #[test]
     fn should_output_fen_rank() {
-        let test_rank = &get_test_board_state()[7];
+        let test_rank = &get_mock_board_state()[7];
         let output = rank_to_fen(&test_rank);
         let result = "r1q1r1k1";
 
@@ -68,7 +68,7 @@ mod test {
     #[test]
     fn should_output_board_as_fen() {
         let correct_fen = get_test_fen();
-        let board = board_to_fen(&get_test_board_state());
+        let board = board_to_fen(&get_mock_board_state());
 
         assert_eq!(board, correct_fen);
     }

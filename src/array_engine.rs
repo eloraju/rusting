@@ -1,4 +1,5 @@
 pub mod engine;
 mod helpers;
-mod fen;
+// Made this public so the tests can utilize helper functions
+pub mod fen;
 

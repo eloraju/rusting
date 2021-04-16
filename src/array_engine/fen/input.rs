@@ -47,7 +47,7 @@ mod test {
     use super::*;
     use crate::{
         test::mocks::mock_board_states::{
-            get_test_board_state,
+            get_mock_board_state,
             get_test_fen
         },
     };
@@ -64,6 +64,6 @@ mod test {
     fn should_parse_fen_to_board() {
         let board_str = get_test_fen();
         let parsed_board = fen_to_board(&board_str);
-        assert_eq!(parsed_board, get_test_board_state());
+        assert_eq!(parsed_board, get_mock_board_state());
     }
 }

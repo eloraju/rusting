@@ -1,15 +1,13 @@
 use super::helpers::s;
 
-#[derive(Debug)]
-#[derive(PartialEq)]
+#[derive(PartialEq, Debug, Clone, Copy)]
 pub enum Color {
     Black,
     White,
     None
 }
 
-#[derive(Debug)]
-#[derive(PartialEq)]
+#[derive(PartialEq, Debug, Clone, Copy)]
 pub enum Piece {
     King(Color),
     Queen(Color),

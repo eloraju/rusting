@@ -43,32 +43,119 @@ impl<BoardType> History<BoardType> {
     }
 
     // Mutation galore...
-    pub fn push(&mut self, new_state: State<BoardType>) {
+    pub fn advance(&mut self, new_state: State<BoardType>) {
         self.states.push(new_state);
-        self.current_state = self.states.len();
+        self.current_state = self.states.len()-1;
     }
 }
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::{
+    use crate::{engine_core::
+        {
+            piece::{Color, Piece}
+        },
         test::{
             mocks::{
-                mock_engine::MockEngine
-            },
-        },
-        engine_core::engine::Engine,
+                mock_board_states::{
+                    init_board_state,
+                    e4_board_state,
+                    e5_board_state,
+                }
+            }
+        }
     };
 
     #[test]
     fn should_create_history() {
-        let board = MockEngine::new();
+        let board = init_board_state();
         let init_state = State::new(board);
-        let hist = History::<MockEngine>::new(init_state);
+        let hist = History::<[[Piece;8];8]>::new(init_state);
 
         assert_eq!(hist.current_state, 0);
         assert_eq!(hist.states.len(), 1);
         assert_eq!(hist.state().turn_count, 0);
     }
 
+    #[test]
+    fn should_advance_state() {
+       let init_board = init_board_state();
+       let init_state = State::new(init_board);
+       let mut history = History::new(init_state) ;
+
+       let e4 = e4_board_state();
+       let new_state = State::new(e4);
+       history.advance(new_state);
+
+       let correct_piece = Piece::Pawn(Color::White);
+       // e4 = [3][4]
+       let piece_at_e4 = history.state().board[3][4];
+
+       assert_eq!(piece_at_e4, correct_piece);
+    }
+
+    #[test]
+    fn should_advance_and_get_previous_state() {
+       let init_board = init_board_state();
+       let init_state = State::new(init_board);
+       let mut history = History::new(init_state) ;
+
+       let e4 = e4_board_state();
+       let new_state = State::new(e4);
+       history.advance(new_state);
+
+       history.prev();
+
+       let piece_at_e4 = history.state().board[3][4];
+
+       assert_eq!(history.current_state, 0);
+       assert_eq!(history.state().board, init_board);
+       assert_eq!(piece_at_e4, Piece::Empty);
+    }
+
+    #[test]
+    fn should_be_able_to_navigate_states() {
+       let init_board = init_board_state();
+       let init_state = State::new(init_board);
+       let mut history = History::new(init_state) ;
+
+       let e4 = e4_board_state();
+       let e4_state = State::new(e4);
+       let e5 = e5_board_state();
+       let e4e5_state = State::new(e5);
+
+       history.advance(e4_state);
+       history.advance(e4e5_state);
+       history.prev();
+       history.prev();
+
+       assert_eq!(init_board, history.state().board);
+       assert_eq!(history.current_state, 0);
+
+       history.next();
+
+       assert_eq!(e4, history.state().board);
+       assert_eq!(history.current_state, 1);
+    }
+    #[test]
+    fn should_get_e4_state() {
+       let init_board = init_board_state();
+       let init_state = State::new(init_board);
+       let mut history = History::new(init_state) ;
+
+       let e4 = e4_board_state();
+       let e4_state = State::new(e4);
+       let e5 = e5_board_state();
+       let e4e5_state = State::new(e5);
+       let d4 = e5_board_state();
+       let e4e5d4_state = State::new(d4);
+
+       history.advance(e4_state);
+       history.advance(e4e5_state);
+       history.advance(e4e5d4_state);
+
+       history.go_to(1);
+
+       assert_eq!(history.state().board, e4);
+    }
 }
