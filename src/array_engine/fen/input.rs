@@ -5,6 +5,7 @@ use crate::engine_core::{
     helpers::vec_to_arr
 };
 
+
 pub fn parse_rank(rank: &str) -> [Piece;8] {
     lazy_static! {
         static ref PIECE_RE: Regex = Regex::new(r"[1-8]").unwrap();
