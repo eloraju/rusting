@@ -15,27 +15,23 @@ pub fn file_to_number(char: &str) -> usize {
     }
 }
 
-pub fn char_to_piece(input: &str)-> String {
+pub fn char_to_piece(input: &str)-> &'static str {
     match input {
-        "K"=> s("♔"),
-        "Q"=> s("♕"),
-        "R"=> s("♖"),
-        "B"=> s("♗"),
-        "N"=> s("♘"),
-        "P"=> s("♙"),
-        "k"=> s("♚"),
-        "q"=> s("♛"),
-        "r"=> s("♜"),
-        "b"=> s("♝"),
-        "n"=> s("♞"),
-        "p"=> s("♟︎"),
-        " "=> s(" "),
-        _  => s("💩"),
+        "K"=> &"♔",
+        "Q"=> &"♕",
+        "R"=> &"♖",
+        "B"=> &"♗",
+        "N"=> &"♘",
+        "P"=> &"♙",
+        "k"=> &"♚",
+        "q"=> &"♛",
+        "r"=> &"♜",
+        "b"=> &"♝",
+        "n"=> &"♞",
+        "p"=> &"♟︎",
+        " "=> &" ",
+        _  => &"💩",
     }
-}
-
-pub fn s(s:&str) -> String {
-    s.to_string()
 }
 
 pub fn vec_to_arr<T, const N:usize>(vector: Vec<T>) -> [T; N] {
