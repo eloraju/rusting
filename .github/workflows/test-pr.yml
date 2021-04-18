@@ -1,6 +1,6 @@
 name: test-and-document
 on: 
-  pull-request:
+  pull_request:
     branches:
       - master
 
