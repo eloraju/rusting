@@ -1,19 +1,8 @@
-use std::convert::TryInto;
 use regex::Regex;
 
-use crate::engine_core::{
-    piece::Piece,
-    square::Square
-};
+use crate::engine_core::square::Square;
 
-
-pub fn vec_rank_to_arr(v: Vec<Piece>) -> [Piece; 8] {
-    match v.try_into() {
-        Ok(array) => array,
-        Err(uhoh) => panic!("Exptected len {} but got {}", 8, uhoh.len())
-    }
-}
-
+#[allow(dead_code)]
 pub fn str_to_square(square: &str) -> Square {
     lazy_static! {
         static ref SQUARE_RE: Regex = Regex::new(r"^(?P<file>[a-h])(?P<rank>[1-8])$").unwrap();

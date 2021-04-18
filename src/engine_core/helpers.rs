@@ -1,6 +1,6 @@
 use std::convert::TryInto;
 
-
+/// Transforms a alphabetic file identifier into a number
 pub fn file_to_number(char: &str) -> usize {
     match char {
         "a" => 0,
@@ -15,6 +15,7 @@ pub fn file_to_number(char: &str) -> usize {
     }
 }
 
+/// Transforms given character into its UTF-8 representation of a chess piece
 pub fn char_to_piece(input: &str)-> &'static str {
     match input {
         "K"=> &"♔",
@@ -34,6 +35,7 @@ pub fn char_to_piece(input: &str)-> &'static str {
     }
 }
 
+/// Transforms a vector into an array
 pub fn vec_to_arr<T, const N:usize>(vector: Vec<T>) -> [T; N] {
     match vector.try_into() {
         Ok(array) => array,

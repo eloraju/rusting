@@ -1,6 +1,11 @@
+#![warn(missing_docs)]
+
+//! TODO
+
 use rusty::array_engine::engine::AEngine;
 use rusty::engine_core::engine::Engine;
 use rusty::test::mocks::mock_board_states::get_test_fen;
+
 fn main() {
     let engine  = AEngine::new();
     engine.print();
