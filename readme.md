@@ -22,7 +22,9 @@ the thing to strive towards.
 
 `cargo run` to run the application
 
-`cargo test` to run tests :)
+`cargo test` to run tests
+
+`cargo doc --open` to create and open documentation in your default browser
 
 Nothing else to it. At this point.
 
