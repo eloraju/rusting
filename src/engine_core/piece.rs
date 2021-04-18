@@ -21,7 +21,7 @@ pub enum Piece {
 
 impl std::fmt::Display for Piece {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", piece_to_str(&self))
+        write!(f, "{}", piece_to_str(self))
     }
 }
 
@@ -43,16 +43,17 @@ pub fn color_to_str(col: &Color) -> &'static str {
 /// Get string representation of the Piece.
 /// # <'p> means that the strings lifetime is bound
 /// # the lifetime of the argument Piece
-pub fn piece_to_str<'p>(piece: &'p Piece) -> &'p str {
+/// # Could all of this be done on compile time within a macro?
+pub fn piece_to_str(piece: &Piece) -> String {
     match piece {
-        Piece::King(c) => &format!("{} King", c),
-        Piece::Queen(c) => &format!("{} Queen", c),
-        Piece::Rook(c) => &format!("{} Rook", c),
-        Piece::Bishop(c) => &format!("{} Bishop", c),
-        Piece::Knight(c) => &format!("{} Knight", c),
-        Piece::Pawn(c) => &format!("{} Pawn", c),
-        Piece::Empty => &"Empty",
-        Piece::Error => &"!ERROR!",
+        Piece::King(c) => format!("{} King", c),
+        Piece::Queen(c) => format!("{} Queen", c),
+        Piece::Rook(c) => format!("{} Rook", c),
+        Piece::Bishop(c) => format!("{} Bishop", c),
+        Piece::Knight(c) => format!("{} Knight", c),
+        Piece::Pawn(c) => format!("{} Pawn", c),
+        Piece::Empty => "Empty".to_string(),
+        Piece::Error => "!ERROR!".to_string(),
     }
 }
 

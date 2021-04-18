@@ -1,12 +1,11 @@
 
 use core::panic;
-use crate::engine_core::{
-    piece::{
+use crate::engine_core::piece::{
         Piece,
         p_to_notation
-    },
-};
+    };
 
+/// Converts a full rank of Pieces into FEN notation
 pub fn rank_to_fen(rank: &[Piece; 8]) -> String {
    let mut space_count = 0;
    let mut result = String::new();
@@ -29,6 +28,7 @@ pub fn rank_to_fen(rank: &[Piece; 8]) -> String {
    return result;
 }
 
+/// Converts a board state into a FEN string
 pub fn board_to_fen(board: &[[Piece; 8];8]) -> String { 
     let mut result_vec: Vec<String> = Vec::new();
     for rank in board {
@@ -38,11 +38,13 @@ pub fn board_to_fen(board: &[[Piece; 8];8]) -> String {
     return result_vec.join("/");
 }
 
-fn fenify(spaces: i32, piece: String) -> String {
+/// Helper function to convert N number of spaces and and a character
+/// into FEN representation.
+fn fenify(spaces: i32, piece: &str) -> String {
     if spaces > 0 {
         return format!("{}{}", spaces, piece);
     } else {
-        return piece;
+        return piece.to_string();
     }
 }
 

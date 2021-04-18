@@ -16,7 +16,7 @@ use super::{fen::{
     output::board_to_fen
 }};
 
-
+/// Engine that uses a two dimensional array to represent the board
 pub struct AEngine {
     history: History<[[Piece; 8]; 8]>
 }
@@ -48,12 +48,13 @@ impl Engine<[[Piece; 8]; 8]> for AEngine {
     }
 
 
+    #[allow(unused_variables)]
     fn state_from_pgn(pgn_str: &str) -> Self {
         todo!()
     }
 
     fn state_to_fen(&self) -> String {
-        // TODO: Convert rest of the state into fed. This is just the board
+        // TODO: Convert rest of the state into fen. This is just the board
         return board_to_fen(&self.board());
     }
 

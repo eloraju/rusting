@@ -4,6 +4,7 @@ use super::{
 };
 
 pub trait Engine<BoardType> {
+    /// Constructor
     fn new() -> Self;
 
     /// Getter for the board representation
@@ -32,5 +33,6 @@ pub trait Engine<BoardType> {
     // Rule enfrocement
     // Position evalution
 
+    /// Print the current engine state into std_out
     fn print(&self);
 }

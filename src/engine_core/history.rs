@@ -2,12 +2,16 @@ use super::{
     state::State,
 };
 
+/// This struct holds the current and all past States of the game.
+/// The States are arranged in a pseudo doublely linked list that
+/// can be traversed easily.
 pub struct History<BoardType>{
     current_state: usize,
     states: Vec<State<BoardType>>
 }
 
 impl<BoardType> History<BoardType> {
+    /// Constructor
     pub fn new(init_state: State<BoardType>) -> Self {
         let mut inst = Self {
             current_state: 0,
@@ -18,6 +22,7 @@ impl<BoardType> History<BoardType> {
         return inst;
     }
 
+    ///
     pub fn state(&self) -> &State<BoardType> {
         &self.states[self.current_state]
     }
