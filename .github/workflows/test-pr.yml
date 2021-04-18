@@ -1,4 +1,4 @@
-name: test-and-document
+name: test
 on: 
   pull_request:
     branches:
@@ -7,7 +7,7 @@ on:
 jobs:
   test:
     name: Run tests
-    runs-on: ubuntu-latest
+    runsmon: ubuntu-latest
     container: rust:latest
     steps:
       - uses: actions/checkout@v2
