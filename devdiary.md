@@ -80,3 +80,17 @@ to FEN notation. Yay! I'll try and work on the `State` and `History` modules a b
 so I could have the FEN parsing parse the whole game state rather than just the board 
 state. Once those two are in a reasonable state, I can start working on the PGN parsing. 
 Maybe once THAT is done I can move on with the actual engine stuff :D
+
+## 21-04-18
+
+I started by merging some changes that I had made during the last week (no idea what
+those were) and then got to work. Inspired by [The Crust of Rust][1] video series
+by Jon Gjengset I tried to figure out how to change some of the more expensive
+String allocations to utilize lifetimes (and I think I succeeded). I also added
+documentation here and there as I was refactoring. The only new thing that I threw
+in here now, was GitHub Workflows/Actions/Pipelines/Whatnot configs. At the moment
+the workflow just runs `carco test` but I would like it to also create the documentation
+and publish in the repo so users could check the documentation from the repo without
+having to clone it.
+
+[1]:https://www.youtube.com/playlist?list=PLqbS7AVVErFiWDOAVrPt7aYmnuuOLYvOa
